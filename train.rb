@@ -2,12 +2,15 @@ require_relative 'brand_module'
 class Train
   attr_reader :speed, :number, :type
 
+  @@trains = []
+
   include(BrandModule)
 
   def initialize(number)
     @number = number
     @speed = 0
     @carriages = []
+    @@trains.push(self)
   end
 
   def carriages
@@ -50,6 +53,12 @@ class Train
 
   def print_stations
     puts "\n#{@route.get_stations(@current_station)}\n"
+  end
+
+  def self.find(number)
+    @@trains.find do |x|
+      x.number == number
+    end
   end
 
   private

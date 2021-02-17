@@ -37,3 +37,5 @@ puts 'Cargo: '
 route.starting_station.show_trains(:CargoTrain)
 puts 'Passenger: '
 route.starting_station.show_trains(:PassengerTrain)
+train = Train.find('AR1231P')
+puts train.nil? ? 'nil' : train
