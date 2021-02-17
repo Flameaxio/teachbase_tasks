@@ -1,4 +1,3 @@
-# Route class
 class Route
   def initialize(starting_station, ending_station)
     @starting_station = starting_station
