@@ -12,7 +12,7 @@ class Station
 
   def show_trains(type = nil)
     current_trains = @trains.select do |x|
-      type.nil? ? x : x.type == type
+      type.nil? ? x : x.class.to_s == type.to_s
     end
     current_trains.each do |x|
       puts x.number

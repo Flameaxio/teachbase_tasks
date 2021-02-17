@@ -1,9 +1,16 @@
 class Train
-  attr_reader :speed, :number, :type, :carriages
+  attr_reader :speed, :number, :type
 
   def initialize(number)
     @number = number
     @speed = 0
+    @carriages = []
+  end
+
+  def carriages
+    @carriages.each do |x|
+      puts "Carriage with type #{x.type}"
+    end
   end
 
   def speed_up(amount)
