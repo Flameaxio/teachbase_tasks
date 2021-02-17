@@ -4,14 +4,14 @@ class CargoTrain < Train
 
   def initialize(number, type)
     super(number, type)
-    @cars = []
+    @carriage = []
   end
 
   def add_car(car)
-    @cars.push car if car.type == :cargo
+    @carriage.push car if car.type == :cargo
   end
 
   def remove_car(car)
-    @cars.delete car if car.type == :cargo
+    @carriage.delete car if car.type == :cargo
   end
 end

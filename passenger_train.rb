@@ -4,15 +4,15 @@ class PassengerTrain < Train
 
   def initialize(number, type)
     super(number, type)
-    @cars = []
+    @carriage = []
   end
 
   def add_car(car)
-    @cars.push car if car.type == :passenger
+    @carriage.push car if car.type == :passenger
   end
 
   def remove_car(car)
-    @cars.delete car if car.type == :passenger
+    @carriage.delete car if car.type == :passenger
   end
 
 end
