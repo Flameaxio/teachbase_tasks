@@ -8,7 +8,7 @@ class Train
   include(BrandModule)
   include(InstanceCounter)
 
-  NUMBER_REGEX = /[A-Z]{2}\d{4}[A-Z]/.freeze
+  NUMBER_REGEX = /[A-Z1-9]{3}-?[A-Z1-9]{2}/.freeze
 
   def initialize(number)
     @number = number
