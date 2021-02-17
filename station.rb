@@ -1,4 +1,5 @@
 class Station
+  attr_reader :name
 
   def initialize(name)
     @name = name
@@ -9,9 +10,12 @@ class Station
     @trains.push(train)
   end
 
-  def show_trains(type = 0)
-    puts @trains.select do |x|
-      type.zero? ? x : x.type == type
+  def show_trains(type = nil)
+    current_trains = @trains.select do |x|
+      type.nil? ? x : x.type == type
+    end
+    current_trains.each do |x|
+      puts x.number
     end
   end
 
