@@ -6,6 +6,6 @@ class CargoCarriage < Carriage
   def initialize(type, capacity)
     super(type)
     @capacity = capacity
-  end
+    end
 
 end
