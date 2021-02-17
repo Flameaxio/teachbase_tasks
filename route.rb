@@ -11,6 +11,8 @@ class Route
 
   def valid?
     raise "Starting and ending stations can't be nil", ArgumentError if @starting_station.nil? || @ending_station.nil?
+
+    true
   end
 
   def add_station(station)

@@ -9,6 +9,12 @@ class Station
     @@all_stations.push(self)
   end
 
+  def valid?
+    raise "Name can't be nil", ArgumentError if @name.nil?
+
+    true
+  end
+
   def self.all
     @@all_stations
   end

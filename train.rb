@@ -21,6 +21,8 @@ class Train
 
   def valid?
     raise "Number should match #{NUMBER_REGEX}", ArgumentError unless @number =~ NUMBER_REGEX
+
+    true
   end
 
   def carriages

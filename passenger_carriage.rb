@@ -10,6 +10,8 @@ class PassengerCarriage < Carriage
 
   def valid?
     raise 'Number of seats should be > 0', RangeError if @number_of_seats <= 0
+
+    true
   end
 
 end
