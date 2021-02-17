@@ -1,7 +1,7 @@
 require_relative 'brand_module'
 require_relative 'instance_counter'
 class Train
-  attr_reader :speed, :number, :type
+  attr_reader :speed, :number
 
   @@trains = []
 
@@ -20,7 +20,7 @@ class Train
   end
 
   def valid?
-    raise "Number should match #{NUMBER_REGEX}", ArgumentError unless @number =~ NUMBER_REGEX
+    raise ArgumentError, "Number should match #{NUMBER_REGEX}" unless @number =~ NUMBER_REGEX
 
     true
   end
@@ -71,6 +71,10 @@ class Train
     @@trains.find do |x|
       x.number == number
     end
+  end
+
+  def to_s
+    "Number #{@number}, Type #{self.class}"
   end
 
   private
