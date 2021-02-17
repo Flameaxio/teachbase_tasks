@@ -31,6 +31,8 @@ another_another_cargo_train = CargoTrain.new('AS1231C')
 another_another_cargo_train.take_route(route)
 passenger_train = PassengerTrain.new('AR1231P')
 passenger_train.take_route(route)
-station_block = proc { |x| puts x }
+train_block = proc { |x| puts x }
+station_block = proc { |x| puts "Train #{x.number} #{x.iterate_carriages(&train_block)}" }
 route_block = proc { |x| x.iterate_trains(&station_block) }
-route.iterate_route(&route_block)
+route.iterate_route(&route_block) # no idea why it outputs full object info alongside with to_s call result
+puts route.in_between_stations[2].show_trains[0].carriages[0].to_s

@@ -6,6 +6,7 @@ class PassengerCarriage < Carriage
 
   def initialize(type, number_of_seats)
     @number_of_seats = number_of_seats
+    @occupied_seats = 0
     super(type)
     valid?
   end
@@ -23,6 +24,10 @@ class PassengerCarriage < Carriage
 
   def free_seats
     @number_of_seats - @occupied_seats
+  end
+
+  def to_s
+    "Total number of seats: #{@number_of_seats}, Occupied seats: #{@occupied_seats}"
   end
 
 end

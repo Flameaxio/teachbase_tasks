@@ -25,4 +25,8 @@ class CargoCarriage < Carriage
     @capacity - @load
   end
 
+  def to_s
+    "Total capacity: #{@capacity}, Load: #{@load}"
+  end
+
 end

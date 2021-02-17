@@ -26,9 +26,7 @@ class Train
   end
 
   def carriages
-    @carriages.each do |x|
-      puts "Carriage with type #{x.type}"
-    end
+    @carriages
   end
 
   def speed_up(amount)
@@ -73,9 +71,6 @@ class Train
     end
   end
 
-  def to_s
-    "Number #{@number}, Type #{self.class}, Number of carriages: #{@carriages.size}"
-  end
 
   def iterate_carriages(&block)
     @carriages.each(&block)
