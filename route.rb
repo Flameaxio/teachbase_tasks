@@ -10,7 +10,7 @@ class Route
   end
 
   def valid?
-    raise "Starting and ending stations can't be nil", ArgumentError if @starting_station.nil? || @ending_station.nil?
+    raise ArgumentError, "Starting and ending stations can't be nil" if @starting_station.nil? || @ending_station.nil?
 
     true
   end

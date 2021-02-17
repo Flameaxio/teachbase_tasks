@@ -10,7 +10,7 @@ class Station
   end
 
   def valid?
-    raise "Name can't be nil", ArgumentError if @name.nil?
+    raise ArgumentError, "Name can't be nil" if @name.nil?
 
     true
   end
