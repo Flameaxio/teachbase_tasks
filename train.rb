@@ -8,12 +8,19 @@ class Train
   include(BrandModule)
   include(InstanceCounter)
 
+  NUMBER_REGEX = /[A-Z]{2}\d{4}[A-Z]/.freeze
+
   def initialize(number)
     @number = number
     @speed = 0
     @carriages = []
     @@trains.push(self)
     register_instance
+    valid?
+  end
+
+  def valid?
+    raise "Number should match #{NUMBER_REGEX}", ArgumentError unless @number =~ NUMBER_REGEX
   end
 
   def carriages
