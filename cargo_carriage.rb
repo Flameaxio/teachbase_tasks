@@ -6,6 +6,11 @@ class CargoCarriage < Carriage
   def initialize(type, capacity)
     super(type)
     @capacity = capacity
+    valid?
+  end
+
+  def valid?
+    raise 'Capacity should be > 0', RangeError if capacity <= 0
   end
 
 end

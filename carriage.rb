@@ -5,7 +5,11 @@ class Carriage
   include(BrandModule)
 
   def initialize(type)
-    'Wrong type' unless %i[passenger cargo].include?(type)
     @type = type
   end
+
+  def valid?
+    raise 'Wrong type, type can be passenger or cargo', ArgumentError unless %i[passenger cargo].include?(type)
+  end
+
 end
