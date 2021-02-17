@@ -10,7 +10,7 @@ class CargoCarriage < Carriage
   end
 
   def valid?
-    raise 'Capacity should be > 0', RangeError if capacity <= 0
+    raise 'Capacity should be > 0', RangeError if @capacity <= 0
   end
 
 end

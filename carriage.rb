@@ -9,7 +9,7 @@ class Carriage
   end
 
   def valid?
-    raise 'Wrong type, type can be passenger or cargo', ArgumentError unless %i[passenger cargo].include?(type)
+    raise 'Wrong type, type can be passenger or cargo', ArgumentError unless %i[passenger cargo].include?(@type)
   end
 
 end
