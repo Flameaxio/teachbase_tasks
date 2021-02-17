@@ -36,4 +36,8 @@ class Station
     @trains.delete(train)
   end
 
+  def iterate_trains(&block)
+    @trains.each(&block)
+  end
+
 end

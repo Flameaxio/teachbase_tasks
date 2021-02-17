@@ -77,6 +77,10 @@ class Train
     "Number #{@number}, Type #{self.class}"
   end
 
+  def iterate_carriages(&block)
+    @carriages.each(&block)
+  end
+
   private
 
   def transfer(start, finish)
