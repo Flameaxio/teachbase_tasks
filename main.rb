@@ -34,4 +34,3 @@ puts 'Cargo: '
 route.starting_station.show_trains(:cargo)
 puts 'Passenger: '
 route.starting_station.show_trains(:passenger)
-
