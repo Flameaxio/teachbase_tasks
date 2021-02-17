@@ -1,7 +1,6 @@
 require_relative 'train'
 
 class CargoTrain < Train
-  attr_reader :cars
 
   def initialize(number, type)
     super(number, type)

@@ -1,5 +1,5 @@
 class Train
-  attr_reader :speed, :number, :type
+  attr_reader :speed, :number, :type, :cars
 
   def initialize(number, type)
     @number = number
