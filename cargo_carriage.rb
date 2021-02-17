@@ -5,8 +5,8 @@ class CargoCarriage < Carriage
   attr_accessor :load
 
   def initialize(type, capacity)
-    super(type)
     @capacity = capacity
+    super(type)
     valid?
   end
 

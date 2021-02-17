@@ -37,6 +37,7 @@ class Station
   end
 
   def iterate_trains(&block)
+    puts "Station: #{@name}"
     @trains.each(&block)
   end
 

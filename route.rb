@@ -1,7 +1,6 @@
 class Route
   attr_accessor :in_between_stations, :starting_station, :ending_station
 
-
   def initialize(starting_station, ending_station)
     @starting_station = starting_station
     @ending_station = ending_station
@@ -37,10 +36,17 @@ class Route
       puts "Current station (last station): #{@ending_station.name}\n" \
       "Previous station: #{@in_between_stations.last}"
     else
-      puts "Current station: #{@in_between_stations[index-1].name}\n" \
+      puts "Current station: #{@in_between_stations[index - 1].name}\n" \
       'Next station:' \
       "#{@in_between_stations[index].nil? ? @ending_station.name : @in_between_stations[index].name}\n" \
       "Previous station: #{@in_between_stations[index - 2].name}"
     end
   end
+
+  def iterate_route(&block)
+    yield(@starting_station)
+    @in_between_stations.each(&block)
+    yield(@ending_station)
+  end
+
 end

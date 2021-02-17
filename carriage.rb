@@ -1,4 +1,5 @@
 require_relative 'brand_module'
+
 class Carriage
   attr_reader :type
 

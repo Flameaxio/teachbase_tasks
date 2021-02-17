@@ -74,7 +74,7 @@ class Train
   end
 
   def to_s
-    "Number #{@number}, Type #{self.class}"
+    "Number #{@number}, Type #{self.class}, Number of carriages: #{@carriages.size}"
   end
 
   def iterate_carriages(&block)

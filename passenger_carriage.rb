@@ -5,8 +5,9 @@ class PassengerCarriage < Carriage
   attr_accessor :occupied_seats
 
   def initialize(type, number_of_seats)
-    super(type)
     @number_of_seats = number_of_seats
+    super(type)
+    valid?
   end
 
   def valid?
