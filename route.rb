@@ -6,6 +6,11 @@ class Route
     @starting_station = starting_station
     @ending_station = ending_station
     @in_between_stations = []
+    valid?
+  end
+
+  def valid?
+    raise "Starting and ending stations can't be nil", ArgumentError if @starting_station.nil? || @ending_station.nil?
   end
 
   def add_station(station)

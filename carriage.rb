@@ -6,6 +6,7 @@ class Carriage
 
   def initialize(type)
     @type = type
+    valid?
   end
 
   def valid?
