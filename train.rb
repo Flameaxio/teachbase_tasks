@@ -1,16 +1,19 @@
 require_relative 'brand_module'
+require_relative 'instance_counter'
 class Train
   attr_reader :speed, :number, :type
 
   @@trains = []
 
   include(BrandModule)
+  include(InstanceCounter)
 
   def initialize(number)
     @number = number
     @speed = 0
     @carriages = []
     @@trains.push(self)
+    register_instance
   end
 
   def carriages
