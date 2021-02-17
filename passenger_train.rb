@@ -7,12 +7,12 @@ class PassengerTrain < Train
     @carriages = []
   end
 
-  def add_car(car)
-    @carriages.push car if car.type == :passenger
+  def add_carriage(carriage)
+    @carriages.push carriage if carriage.type == :passenger
   end
 
-  def remove_car(car)
-    @carriages.delete car if car.type == :passenger
+  def remove_carriage(carriage)
+    @carriages.delete carriage if carriage.type == :passenger
   end
 
 end
