@@ -1,5 +1,8 @@
+require_relative 'brand_module'
 class Train
   attr_reader :speed, :number, :type
+
+  include(BrandModule)
 
   def initialize(number)
     @number = number
