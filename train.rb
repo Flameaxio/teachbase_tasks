@@ -64,6 +64,10 @@ class Train
     end
   end
 
+  def to_s
+    "Number #{@number}, type #{@type}, carriages: #{@carriages.map(&:to_s)}"
+  end
+
   private
 
   def transfer(start, finish)
