@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Importing classes
 require_relative 'station'
 require_relative 'route'
