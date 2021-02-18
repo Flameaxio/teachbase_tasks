@@ -1,3 +1,4 @@
+# Counts all the instances of the class
 module InstanceCounter
 
   def self.included(base)
@@ -5,10 +6,12 @@ module InstanceCounter
     base.send :include, InstanceMethods
   end
 
+  # Class methods
   module ClassMethods
     attr_accessor :instances
   end
 
+  # Instance methods
   module InstanceMethods
     protected
 

@@ -1,4 +1,8 @@
+# frozen_string_literal: true
+
 require_relative 'brand_module'
+
+# Carriage class
 class Carriage
   attr_reader :type
 
