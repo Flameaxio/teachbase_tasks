@@ -17,23 +17,21 @@ route.add_station(Station.new('Наукова'))
 route.add_station(Station.new('Держпром'))
 route.add_station(Station.new('Архітектора Бекетова'))
 route.add_station(Station.new('Захисників України'))
-cargo_train = PassengerTrain.new('AS1231A')
-cargo_train.take_route(route)
-cargo_train.add_carriage(PassengerCarriage.new(:passenger, 64))
-cargo_train.speed_up(100)
-cargo_train.add_carriage(PassengerCarriage.new(:passenger, 32))
-cargo_train.print_stations
-cargo_train.move_station
-cargo_train.print_stations
-cargo_train.move_station
-cargo_train.print_stations
-another_cargo_train = CargoTrain.new('AS1231B')
-another_cargo_train.take_route(route)
-another_another_cargo_train = CargoTrain.new('AS1231C')
-another_another_cargo_train.take_route(route)
-passenger_train = PassengerTrain.new('AR1231P')
-passenger_train.take_route(route)
-train_block = proc { |x| x.to_s }
-station_block = proc { |x| puts "Train #{x.number} #{x.iterate_carriages(&train_block)}" }
-route_block = proc { |x| x.iterate_trains(&station_block) }
-route.iterate_route(&route_block)
+loop do
+  begin
+    puts 'Enter the number of the train (or stop): '
+    number = gets.chomp
+    break if number == 'stop'
+
+    puts 'Enter the type of the train (passenger or cargo): '
+    type = gets.chomp
+    train = TrainFactory.get_train(number, type)
+    puts "Created train: #{train}"
+    route.starting_station.accept_train(train)
+  rescue ArgumentError => e
+    puts e.message
+    retry
+  end
+end
+puts "All trains on station 1: #{route.starting_station.show_trains}"
+puts "Total number of trains: #{Train.trains.size}"
