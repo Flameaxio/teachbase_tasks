@@ -9,6 +9,10 @@ class Route
   end
 
   def add_station(station)
+    unless station.is_a? Station
+      puts 'Wrong input'
+      return false
+    end
     @in_between_stations.push(station)
   end
 
