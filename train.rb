@@ -1,5 +1,6 @@
 require_relative 'brand_module'
 require_relative 'instance_counter'
+
 class Train
   attr_reader :speed, :number
 
@@ -71,9 +72,8 @@ class Train
     end
   end
 
-
   def iterate_carriages(&block)
-    @carriages.each(&block)
+    @carriages.map(&block)
   end
 
   private

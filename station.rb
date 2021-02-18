@@ -40,7 +40,7 @@ class Station
 
   def iterate_trains(&block)
     puts "Station: #{@name}"
-    @trains.each(&block)
+    @trains.map(&block)
   end
 
 end
