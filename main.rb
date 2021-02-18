@@ -33,5 +33,6 @@ loop do
     retry
   end
 end
-puts "All trains on station 1: #{route.starting_station.show_trains}"
-puts "Total number of trains: #{Train.trains.size}"
+station_block = proc { |x| printf "%15sTrain #{x.number} #{x.iterate_carriages(&:to_s)}\n", '' }
+route_block = proc { |x| x.iterate_trains(&station_block) }
+route.iterate_route(&route_block)
