@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Importing classes
 load './station.rb'
 load './route.rb'
