@@ -9,7 +9,7 @@
 
 receipt = {}
 loop do
-  puts 'Enter the name (of stop to exit): '
+  puts 'Enter the name (or stop to exit): '
   name = gets.chomp
   break if name == 'stop'
 
