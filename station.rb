@@ -4,22 +4,27 @@
 class Station
   attr_reader :name
 
-  @@all_stations = []
+  @all_stations = []
+
+  class << self
+    attr_accessor :all_stations
+
+    def all
+      self.class.all_stations
+    end
+  end
 
   def initialize(name)
     @name = name
     @trains = []
-    @@all_stations.push(self)
+    self.class.all_stations.push(self)
+    valid?
   end
 
   def valid?
     raise ArgumentError, "Name can't be nil" if @name.nil?
 
     true
-  end
-
-  def self.all
-    @@all_stations
   end
 
   def accept_train(train)
@@ -49,5 +54,4 @@ class Station
     puts "Station: #{@name}"
     @trains.map(&block)
   end
-
 end

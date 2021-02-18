@@ -2,16 +2,17 @@
 
 # Counts total amount of the instances created
 module InstanceCounter
-
   def self.included(base)
     base.extend ClassMethods
     base.send :include, InstanceMethods
   end
 
+  # Class methods
   module ClassMethods
     attr_accessor :instances
   end
 
+  # Instance methods
   module InstanceMethods
     protected
 

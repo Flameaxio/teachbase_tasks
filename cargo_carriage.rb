@@ -31,5 +31,4 @@ class CargoCarriage < Carriage
   def to_s
     "Total capacity: #{@capacity}, Load: #{@load}"
   end
-
 end

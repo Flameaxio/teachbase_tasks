@@ -32,5 +32,4 @@ class PassengerCarriage < Carriage
   def to_s
     "Total number of seats: #{@number_of_seats}, Occupied seats: #{@occupied_seats}"
   end
-
 end

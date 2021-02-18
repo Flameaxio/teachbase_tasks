@@ -37,16 +37,11 @@ class Route
 
   def get_stations(index)
     if index.zero?
-      puts "Current station (at start): #{@starting_station.name}\n" \
-      "Next station: #{@in_between_stations[index].name}"
+      start_station index
     elsif index == @in_between_stations.size
-      puts "Current station (last station): #{@ending_station.name}\n" \
-      "Previous station: #{@in_between_stations.last}"
+      last_station
     else
-      puts "Current station: #{@in_between_stations[index - 1].name}\n" \
-      'Next station:' \
-      "#{@in_between_stations[index].nil? ? @ending_station.name : @in_between_stations[index].name}\n" \
-      "Previous station: #{@in_between_stations[index - 2].name}"
+      in_between_station index
     end
   end
 
@@ -56,4 +51,22 @@ class Route
     yield(@ending_station)
   end
 
+  private
+
+  def start_station(index)
+    puts "Current station (at start): #{@starting_station.name}\n" \
+      "Next station: #{@in_between_stations[index].name}"
+  end
+
+  def last_station
+    puts "Current station (last station): #{@ending_station.name}\n" \
+      "Previous station: #{@in_between_stations.last}"
+  end
+
+  def in_between_station(index)
+    puts "Current station: #{@in_between_stations[index - 1].name}\n" \
+      'Next station:' \
+      "#{@in_between_stations[index].nil? ? @ending_station.name : @in_between_stations[index].name}\n" \
+      "Previous station: #{@in_between_stations[index - 2].name}"
+  end
 end
