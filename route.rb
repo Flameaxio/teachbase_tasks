@@ -30,17 +30,17 @@ class Route
 
   def get_stations(index)
     if index.zero?
-      start_station
+      start_station index
     elsif index == @in_between_stations.size
       last_station
     else
-      in_between_station
+      in_between_station index
     end
   end
 
   private
 
-  def start_station
+  def start_station(index)
     puts "Current station (at start): #{@starting_station.name}\n" \
       "Next station: #{@in_between_stations[index].name}"
   end
@@ -50,7 +50,7 @@ class Route
       "Previous station: #{@in_between_stations.last}"
   end
 
-  def in_between_station
+  def in_between_station(index)
     puts "Current station: #{@in_between_stations[index - 1].name}\n" \
       'Next station:' \
       "#{@in_between_stations[index].nil? ? @ending_station.name : @in_between_stations[index].name}\n" \
