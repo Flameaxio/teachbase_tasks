@@ -4,7 +4,6 @@ require_relative 'train'
 
 # Cargo train class
 class CargoTrain < Train
-
   def add_carriage(carriage)
     @carriages.push carriage if !speed.positive? && (carriage.type == :cargo)
   end

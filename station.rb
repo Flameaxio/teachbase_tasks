@@ -4,12 +4,21 @@
 class Station
   attr_reader :name
 
-  @@all_stations = []
+  @all_stations = []
+
+  class << self
+    attr_accessor :all_stations
+
+    def all
+      self.class.all_stations
+    end
+  end
 
   def initialize(name)
     @name = name
     @trains = []
-    @@all_stations.push(self)
+    self.class.all_stations.push(self)
+    valid?
   end
 
   def valid?
@@ -18,9 +27,6 @@ class Station
     true
   end
 
-  def self.all
-    @@all_stations
-  end
 
   def accept_train(train)
     unless train.is_a? Train
@@ -44,5 +50,4 @@ class Station
 
     @trains.delete(train)
   end
-
 end

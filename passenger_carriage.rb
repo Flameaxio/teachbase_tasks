@@ -16,5 +16,4 @@ class PassengerCarriage < Carriage
 
     true
   end
-
 end

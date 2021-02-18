@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 # Counts all the instances of the class
 module InstanceCounter
-
   def self.included(base)
     base.extend ClassMethods
     base.send :include, InstanceMethods

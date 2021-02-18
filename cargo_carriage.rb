@@ -17,5 +17,4 @@ class CargoCarriage < Carriage
 
     true
   end
-
 end
