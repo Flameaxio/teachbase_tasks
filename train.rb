@@ -5,9 +5,8 @@ require_relative 'instance_counter'
 
 # Train class
 class Train
-  attr_reader :speed, :number, :carriages
-
-  @trains = []
+  include(BrandModule)
+  include(InstanceCounter)
 
   class << self
     attr_accessor :trains
@@ -20,8 +19,9 @@ class Train
     end
   end
 
-  include(BrandModule)
-  include(InstanceCounter)
+  attr_reader :speed, :number, :carriages
+
+  @trains = []
 
   NUMBER_REGEX = /[A-Z1-9]{3}-?[A-Z1-9]{2}/.freeze
 

@@ -22,11 +22,11 @@ class Route
       puts 'Wrong input'
       return false
     end
-    @in_between_stations.push(station)
+    @in_between_stations.push station
   end
 
   def delete_station(station)
-    @in_between_stations.delete(station)
+    @in_between_stations.delete station
   end
 
   def print_stations
@@ -46,9 +46,9 @@ class Route
   end
 
   def iterate_route(&block)
-    yield(@starting_station)
+    yield @starting_station
     @in_between_stations.each(&block)
-    yield(@ending_station)
+    yield @ending_station
   end
 
   private

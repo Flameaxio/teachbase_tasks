@@ -10,7 +10,7 @@ class PassengerCarriage < Carriage
   def initialize(type, number_of_seats)
     @number_of_seats = number_of_seats
     @occupied_seats = 0
-    super(type)
+    super type
     valid?
   end
 
@@ -21,7 +21,8 @@ class PassengerCarriage < Carriage
   end
 
   def occupy_seat
-    'Full' if @occupied_seats == @number_of_seats
+    return 'Full' if @occupied_seats == @number_of_seats
+
     @occupied_seats += 1
   end
 

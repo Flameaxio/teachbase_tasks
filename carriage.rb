@@ -4,9 +4,9 @@ require_relative 'brand_module'
 
 # Carriage class
 class Carriage
-  attr_reader :type
-
   include(BrandModule)
+
+  attr_reader :type
 
   def initialize(type)
     @type = type
