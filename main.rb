@@ -9,7 +9,7 @@ require_relative 'cargo_train'
 require_relative 'cargo_carriage'
 require_relative 'train_factory'
 
-route = Route.new(Station.new('Перемога'), Station.new('Метробудiвникiв'))
+route = Route.new(Station.new('Перемога'), Station.new('Метробудівників'))
 route.add_station(Station.new('Олексіївська'))
 route.add_station(Station.new('23-го серпня'))
 route.add_station(Station.new('Ботанічний сад'))
@@ -37,4 +37,3 @@ train_block = proc { |x| x.to_s }
 station_block = proc { |x| puts "Train #{x.number} #{x.iterate_carriages(&train_block)}" }
 route_block = proc { |x| x.iterate_trains(&station_block) }
 route.iterate_route(&route_block)
-
