@@ -1,16 +1,23 @@
+# frozen_string_literal: true
+
+# Station class
 class Station
   attr_reader :name
 
-  @@all_stations = []
+  @all_stations = []
+
+  class << self
+    attr_accessor :all_stations
+  end
 
   def initialize(name)
     @name = name
     @trains = []
-    @@all_stations.push(self)
+    self.class.all_stations.push(self)
   end
 
   def self.all
-    @@all_stations
+    self.class.all_stations
   end
 
   def accept_train(train)
@@ -35,5 +42,4 @@ class Station
 
     @trains.delete(train)
   end
-
 end
