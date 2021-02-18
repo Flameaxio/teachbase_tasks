@@ -5,10 +5,14 @@ class Train
   attr_reader :speed, :number_of_cars, :number, :type
 
   def initialize(number, type, number_of_cars)
-    @number = number
-    @type = type
-    @number_of_cars = number_of_cars
-    @speed = 0
+    if %i[passenger cargo].include? type
+      @number = number
+      @type = type
+      @number_of_cars = number_of_cars
+      @speed = 0
+    else
+      puts 'Wrong input'
+    end
   end
 
   def speed_up(amount)
