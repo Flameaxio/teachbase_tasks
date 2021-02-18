@@ -49,6 +49,10 @@ class Train
     puts "\n#{@route.get_stations(@current_station)}\n"
   end
 
+  def to_s
+    "Number #{@number}, type #{@type}, carriages: #{@carriages.map(&:to_s)}"
+  end
+
   private
 
   def transfer(start, finish)
