@@ -42,7 +42,7 @@ class Train
   end
 
   def to_s
-    "Number #{@number}, type #{@type}, carriages: #{@carriages.map(&:to_s)}"
+    "Number #{@number}, type #{self.class}, carriages: #{@carriages.map(&:to_s)}"
   end
 
   private
