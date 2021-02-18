@@ -1,0 +1,2 @@
+class TrainFactory
+end
