@@ -5,7 +5,7 @@ load './station.rb'
 load './route.rb'
 load './train.rb'
 
-route = Route.new(Station.new('Перемога'), Station.new('Метробудiвникiв'))
+route = Route.new(Station.new('Перемога'), Station.new('Метробудівників'))
 route.add_station(Station.new('Олексіївська'))
 route.add_station(Station.new('23-го серпня'))
 route.add_station(Station.new('Ботанічний сад'))
