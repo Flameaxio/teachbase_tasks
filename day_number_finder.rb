@@ -14,6 +14,13 @@ def leap?(year)
   (year % 4).zero? && (year % 100 != 0 || (year % 400).zero?)
 end
 
+def valid?(day, month, year)
+  return false if day.positive? || month.positive? || year.positive?
+  return false if month > 12 || day > COMMON_YEAR_DAYS_IN_MONTH[month]
+
+  true
+end
+
 puts 'Enter date: '
 day_number = gets.chomp.to_i
 puts 'Enter month: '
@@ -22,7 +29,11 @@ puts 'Enter year: '
 year = gets.chomp.to_i
 day = day_number
 COMMON_YEAR_DAYS_IN_MONTH = [nil, 31, 28 + (leap?(year) ? 1 : 0), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31].freeze
-(1..month - 1).each do |index|
-  day += COMMON_YEAR_DAYS_IN_MONTH[index]
+if valid? day_number, month, year
+  (1..month - 1).each do |index|
+    day += COMMON_YEAR_DAYS_IN_MONTH[index]
+  end
+  puts "Index number of this day is: #{day}"
+else
+  puts 'Incorrect input'
 end
-puts "Index number of this day is: #{day}"
