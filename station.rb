@@ -7,6 +7,10 @@ class Station
   end
 
   def accept_train(train)
+    unless train.is_a? Train
+      puts 'Wrong input'
+      return false
+    end
     @trains.push(train)
   end
 
