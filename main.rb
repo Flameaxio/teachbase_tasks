@@ -7,6 +7,7 @@ require_relative 'passenger_train'
 require_relative 'passenger_carriage'
 require_relative 'cargo_train'
 require_relative 'cargo_carriage'
+require_relative 'train_factory'
 
 route = Route.new(Station.new('Перемога'), Station.new('Метробудівників'))
 route.add_station(Station.new('Олексіївська'))
