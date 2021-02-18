@@ -7,6 +7,13 @@
 # Также вывести итоговую сумму за каждый товар.
 # Вычислить и вывести на экран итоговую сумму всех покупок в "корзине".
 
+
+def valid?(name, price, quantity)
+  return false if !name.length.positive? || !price.positive? || !quantity.positive?
+
+  true
+end
+
 receipt = {}
 loop do
   puts 'Enter the name (or stop to exit): '
@@ -18,7 +25,11 @@ loop do
   puts 'Enter quantity: '
   quantity = gets.chomp.to_f
 
-  receipt[name] = { price: price, quantity: quantity, total: price * quantity }
+  if valid? name, price, quantity
+    receipt[name] = { price: price, quantity: quantity, total: price * quantity }
+  else
+    puts 'Incorrect input, try again'
+  end
 end
 receipt_total = 0
 receipt.each do |name, info|
