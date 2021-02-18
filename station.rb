@@ -14,12 +14,14 @@ class Station
     current_trains = @trains.select do |x|
       type.nil? ? x : x.type == type
     end
-    current_trains.each do |x|
-      puts x.number
-    end
+    return 'There are no trains' if current_trains.empty?
+
+    current_trains.map(&:to_s)
   end
 
   def send_train(train)
+    return 'There are no trains' if @trains.empty?
+
     @trains.delete(train)
   end
 
