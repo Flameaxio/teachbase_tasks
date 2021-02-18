@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Route class
 class Route
   attr_accessor :in_between_stations, :starting_station, :ending_station
 

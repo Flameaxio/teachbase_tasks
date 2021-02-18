@@ -1,6 +1,9 @@
+# frozen_string_literal: true
 require_relative 'brand_module'
 require_relative 'instance_counter'
 
+
+# Train class
 class Train
   attr_reader :speed, :number
 

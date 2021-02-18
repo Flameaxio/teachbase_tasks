@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 require_relative 'train'
 
+# Passenger train class
 class PassengerTrain < Train
 
   def add_carriage(carriage)

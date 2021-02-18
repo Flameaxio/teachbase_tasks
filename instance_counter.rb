@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Counts total amount of the instances created
 module InstanceCounter
 
   def self.included(base)

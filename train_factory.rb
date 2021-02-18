@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Creates object of the train with specified type
 class TrainFactory
 
   def self.get_train(number, type)
