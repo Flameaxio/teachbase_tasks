@@ -8,16 +8,16 @@ class Station
 
   class << self
     attr_accessor :all_stations
+
+    def all
+      self.class.all_stations
+    end
   end
 
   def initialize(name)
     @name = name
     @trains = []
     self.class.all_stations.push(self)
-  end
-
-  def self.all
-    self.class.all_stations
   end
 
   def accept_train(train)
@@ -30,7 +30,7 @@ class Station
 
   def show_trains(type = nil)
     current_trains = @trains.select do |x|
-      type.nil? ? x : x.type == type
+      type.nil? ? x : x.type.to_s == type.to_s
     end
     return 'There are no trains' if current_trains.empty?
 
