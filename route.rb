@@ -1,20 +1,21 @@
 # frozen_string_literal: true
 
+require_relative 'validation'
+
 # Route class
 class Route
+  include(Validation)
+
   attr_accessor :in_between_stations, :starting_station, :ending_station
+
+  validate(:starting_station, :presence)
+  validate(:ending_station, :presence)
 
   def initialize(starting_station, ending_station)
     @starting_station = starting_station
     @ending_station = ending_station
     @in_between_stations = []
     valid?
-  end
-
-  def valid?
-    raise ArgumentError, "Starting and ending stations can't be nil" if @starting_station.nil? || @ending_station.nil?
-
-    true
   end
 
   def add_station(station)

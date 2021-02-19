@@ -1,8 +1,14 @@
 # frozen_string_literal: true
 
+require_relative 'validation'
+
 # Station class
 class Station
+  include(Validation)
+
   attr_reader :name
+
+  validate(:name, :presence)
 
   @all_stations = []
 
@@ -14,17 +20,12 @@ class Station
     end
   end
 
+
   def initialize(name)
     @name = name
     @trains = []
     self.class.all_stations.push(self)
     valid?
-  end
-
-  def valid?
-    raise ArgumentError, "Name can't be nil" if @name.nil?
-
-    true
   end
 
   def accept_train(train)

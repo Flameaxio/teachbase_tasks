@@ -1,21 +1,20 @@
 # frozen_string_literal: true
 
 require_relative 'brand_module'
+require_relative 'validation'
 
 # Carriage class
 class Carriage
   include(BrandModule)
+  include(Validation)
 
   attr_reader :type
+
+  validate(:type, :format, option: /(passenger) | (cargo)/)
 
   def initialize(type)
     @type = type
     valid?
   end
 
-  def valid?
-    raise ArgumentError, 'Wrong type, type can be passenger or cargo' unless %i[passenger cargo].include?(@type)
-
-    true
-  end
 end

@@ -4,19 +4,16 @@ require_relative 'carriage'
 
 # Cargo carriage class
 class CargoCarriage < Carriage
+  include(Validation)
   attr_reader :capacity
   attr_accessor :load
+
+  validate(:capacity, :format, option: /[+]?\d+([.]\d+)?/)
 
   def initialize(type, capacity)
     @capacity = capacity
     super type
     valid?
-  end
-
-  def valid?
-    raise RangeError, 'Capacity should be > 0' if @capacity <= 0
-
-    true
   end
 
   def load_cargo(amount)
