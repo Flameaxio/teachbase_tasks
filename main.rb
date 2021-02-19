@@ -36,4 +36,7 @@ end
 station_block = proc { |x| printf "%15sTrain #{x.number} #{x.iterate_carriages(&:to_s)}\n", '' }
 route_block = proc { |x| x.iterate_trains(&station_block) }
 route.iterate_route(&route_block)
+carriage = PassengerCarriage.new(:passenger, 64)
+4.times { carriage.occupy_seat }
+puts carriage.occupied_seats_history
 
