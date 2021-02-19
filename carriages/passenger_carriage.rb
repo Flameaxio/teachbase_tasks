@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'carriage'
-require_relative 'accessors'
+require_relative '../modules/accessors'
 
 # Passenger carriage class
 class PassengerCarriage < Carriage
@@ -12,7 +12,7 @@ class PassengerCarriage < Carriage
 
   attr_accessor_with_history :occupied_seats
 
-  validate(:number_of_seats, :format, option: /[+]?\d+([.]\d+)?/)
+  validate(:number_of_seats, :format, option: /[1-9]+/)
 
   def initialize(type, number_of_seats)
     @number_of_seats = number_of_seats
@@ -25,6 +25,7 @@ class PassengerCarriage < Carriage
     return 'Full' if @occupied_seats == @number_of_seats
 
     self.occupied_seats += 1
+    puts self.occupied_seats
   end
 
   def free_seats

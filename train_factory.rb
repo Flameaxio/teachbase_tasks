@@ -8,4 +8,11 @@ module TrainFactory
 
     raise ArgumentError, 'Wrong type'
   end
+
+  def self.get_carriage(type, capacity: 0, number_of_seats: 0)
+    return PassengerCarriage.new(type, number_of_seats) if type == :passenger.to_s
+    return CargoCarriage.new(type, capacity) if type == :cargo.to_s
+
+    raise ArgumentError, 'Wrong type'
+  end
 end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'validation'
+require_relative 'modules/validation'
 
 # Route class
 class Route
@@ -11,10 +11,10 @@ class Route
   validate(:starting_station, :presence)
   validate(:ending_station, :presence)
 
-  def initialize(starting_station, ending_station)
-    @starting_station = starting_station
-    @ending_station = ending_station
-    @in_between_stations = []
+  def initialize(*args)
+    @starting_station = args.first
+    @ending_station = args.last
+    @in_between_stations = args[1...length]
     valid?
   end
 
@@ -28,6 +28,10 @@ class Route
 
   def delete_station(station)
     @in_between_stations.delete station
+  end
+
+  def to_s
+    "#{starting_station} -> #{ending_station}"
   end
 
   def print_stations

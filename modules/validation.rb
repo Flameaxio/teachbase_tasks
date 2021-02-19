@@ -62,7 +62,7 @@ module Validation
     def validate!
       self.class.validation_hash.each do |attribute_name, type|
         type.each do |key, value|
-          send("#{key}_validation", value[:error_message], attribute_name, value[:option])
+          send("#{key}_validation", value[:error_message], attribute_name, option: value[:option])
         end
       end
       true
@@ -70,8 +70,6 @@ module Validation
 
     def valid?
       validate!
-    rescue ArgumentError
-      false
     end
 
     def presence_validation(error_message, attribute_name, option: true)
@@ -81,7 +79,7 @@ module Validation
     end
 
     def format_validation(error_message, attribute_name, option: true)
-      raise ArgumentError, error_message unless public_send(attribute_name) =~ option
+      raise ArgumentError, error_message if public_send(attribute_name).to_s !~ option
     end
 
     def type_validation(error_message, attribute_name, option: true)

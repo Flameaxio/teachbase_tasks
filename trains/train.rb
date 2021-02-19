@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require_relative 'brand_module'
-require_relative 'instance_counter'
-require_relative 'validation'
+require_relative '../modules/brand_module'
+require_relative '../modules/instance_counter'
+require_relative '../modules/validation'
 
 # Train class
 class Train
@@ -21,9 +21,8 @@ class Train
     end
   end
 
-  attr_reader :speed, :number, :carriages
+  attr_accessor :speed, :number, :carriages
 
-  validate(:number, :format, option: /[A-Z1-9]{3}-?[A-Z1-9]{2}/)
 
   @trains = []
 
@@ -37,7 +36,7 @@ class Train
     else
       self.class.trains.push(self)
     end
-    register_instance
+    self.class.validate(:number, :format, option: /^[A-Z1-9]{3}-?[A-Z1-9]{2}$/)
     valid?
   end
 
@@ -98,5 +97,9 @@ class Train
     else
       transfer(stations[@current_station - 1], stations[@current_station])
     end
+  end
+
+  def to_s
+    "Number: #{@number}, Type: #{@type}, Carriages: #{@carriages.count}"
   end
 end

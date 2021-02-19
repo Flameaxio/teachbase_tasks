@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'validation'
+require_relative 'modules/validation'
 
 # Station class
 class Station
@@ -54,5 +54,9 @@ class Station
   def iterate_trains(&block)
     puts "Station: #{@name}"
     @trains.map(&block)
+  end
+
+  def to_s
+    @name
   end
 end
