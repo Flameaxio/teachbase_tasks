@@ -2,9 +2,11 @@
 
 require_relative 'brand_module'
 require_relative 'instance_counter'
+require_relative 'validation'
 
 # Train class
 class Train
+  include(Validation)
   include(BrandModule)
   include(InstanceCounter)
 
@@ -21,9 +23,10 @@ class Train
 
   attr_reader :speed, :number, :carriages
 
+  validate(:number, :format, option: /[A-Z1-9]{3}-?[A-Z1-9]{2}/)
+
   @trains = []
 
-  NUMBER_REGEX = /[A-Z1-9]{3}-?[A-Z1-9]{2}/.freeze
 
   def initialize(number)
     @number = number
@@ -40,12 +43,6 @@ class Train
 
   def type
     @type ||= self.class.to_s
-  end
-
-  def valid?
-    raise ArgumentError, "Number should match #{NUMBER_REGEX}" unless @number =~ NUMBER_REGEX
-
-    true
   end
 
   def speed_up(amount)
