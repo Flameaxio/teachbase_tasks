@@ -24,7 +24,9 @@ class Main
     3 => :add_carriage,
     4 => :remove_carriage,
     5 => :add_train_to_station,
-    6 => :trains_on_station
+    6 => :trains_on_station,
+    7 => :choose_carriage,
+    8 => :control_train
   }.freeze
   attr_reader :stations, :trains
 
@@ -70,6 +72,8 @@ class Main
 4 - Remove carriages from the train
 5 - Put trains on the station
 6 - List all the stations and trains on them
+7 - Take place or volume in the carriage
+8 - Control the train
 Enter number:"
     gets.chomp.to_i
   end
