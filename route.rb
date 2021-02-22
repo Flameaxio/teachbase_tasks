@@ -35,7 +35,7 @@ class Route
   end
 
   def to_s
-    @stations
+    stations.to_s
   end
 
   def get_stations(index)

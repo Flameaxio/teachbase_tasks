@@ -9,6 +9,8 @@ class CargoCarriage < Carriage
 
 
   def initialize(type, capacity)
+    raise ArgumentError if capacity < 0
+
     @capacity = capacity
     super type
   end

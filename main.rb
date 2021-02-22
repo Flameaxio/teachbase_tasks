@@ -40,7 +40,9 @@ class Main
 
       send(ACTIONS[action])
     end
-    # Rescue
+  rescue StandardError
+    puts 'Wrong input'
+    retry
   end
 
   private
