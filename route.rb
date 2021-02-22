@@ -6,16 +6,24 @@ require_relative 'modules/validation'
 class Route
   include(Validation)
 
-  attr_accessor :in_between_stations, :starting_station, :ending_station
-
-  validate(:starting_station, :presence)
-  validate(:ending_station, :presence)
+  def stations
+    @stations ||= []
+  end
 
   def initialize(*args)
-    @starting_station = args.first
-    @ending_station = args.last
-    @in_between_stations = args[1...length]
+    @stations = []
+    args.each do |x|
+      @stations << x
+    end
+    create_bonds
     valid?
+  end
+
+  def create_bonds
+    @stations.each_cons(2) do |a, b|
+      a.next_station = b
+      b.previous_station = a
+    end
   end
 
   def add_station(station)
@@ -23,55 +31,41 @@ class Route
       puts 'Wrong input'
       return false
     end
-    @in_between_stations.push station
+    @stations.push station
   end
 
   def delete_station(station)
-    @in_between_stations.delete station
+    @stations.delete station
   end
 
   def to_s
-    "#{starting_station} -> #{ending_station}"
-  end
-
-  def print_stations
-    puts @starting_station
-    puts @in_between_stations
-    puts @ending_station
+    @stations
   end
 
   def get_stations(index)
-    if index.zero?
-      start_station index
-    elsif index == @in_between_stations.size
-      last_station
-    else
-      in_between_station index
-    end
+    @stations[index]
   end
 
   def iterate_route(&block)
-    yield @starting_station
-    @in_between_stations.each(&block)
-    yield @ending_station
+    @stations.each(&block)
   end
 
   private
 
   def start_station(index)
-    puts "Current station (at start): #{@starting_station.name}\n" \
-      "Next station: #{@in_between_stations[index].name}"
+    puts "Current station (at start): #{@stations.first}\n" \
+      "Next station: #{@stations[index].name}"
   end
 
   def last_station
-    puts "Current station (last station): #{@ending_station.name}\n" \
-      "Previous station: #{@in_between_stations.last}"
+    puts "Current station (last station): #{@stations.last}\n" \
+      "Previous station: #{@stations.last.previous_station}"
   end
 
   def in_between_station(index)
-    puts "Current station: #{@in_between_stations[index - 1].name}\n" \
+    puts "Current station: #{@stations[index - 1].name}\n" \
       'Next station:' \
-      "#{@in_between_stations[index].nil? ? @ending_station.name : @in_between_stations[index].name}\n" \
-      "Previous station: #{@in_between_stations[index - 2].name}"
+      "#{@stations[index].nil? ? @stations.last : @stations[index].name}\n" \
+      "Previous station: #{@stations[index - 2].name}"
   end
 end

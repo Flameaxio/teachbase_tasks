@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'trains/train'
 require_relative 'route'
 require_relative 'station'
@@ -24,7 +26,8 @@ class Main
     4 => :remove_station,
     5 => :add_train_to_station,
     6 => :trains_on_station,
-    7 => :choose_carriage
+    7 => :choose_carriage,
+    8 => :control_train
   }.freeze
   attr_reader :stations, :trains
 
@@ -40,16 +43,17 @@ class Main
 
       send(ACTIONS[action])
     end
+    # Rescue
   end
 
   private
 
-  attr_writer :stations, :trains
+  attr_writer :stations, :trains, :route
 
   def choose_train_type
-    puts 'Введите тип поезда который хотите создать!
-      1 - Пасажирский
-      2 - Товарный
+    puts 'Select the type of the train!
+      1 - Passenger
+      2 - Cargo
     '
     train_type = gets.chomp.to_i
     create_train(train_type)
@@ -64,13 +68,13 @@ class Main
   end
 
   def choose_action
-    puts "Список действий\n0 - Выход\n1 - Создавать станции\n2 - Создавать поезда
-3 - Добавлять вагоны к поезду
-4 - Отцеплять вагоны от поезда
-5 - Помещать поезда на станцию
-6 - Просматривать список станций и список поездов на станции
-7 - Занять место или обьем в вагоне
-ВВЕДИТЕ НОМЕР:"
+    puts "List of actions\n0 - Exit\n1 - Create stations\n2 - Create trains\n3 - Add carriages to the train
+4 - Remove carriages from the train
+5 - Put trains on the station
+6 - List all the stations and trains on them
+7 - Take place or volume in the carriage
+8 - Control the train
+Enter number:"
     gets.chomp.to_i
   end
 end

@@ -21,11 +21,9 @@ class Train
     end
   end
 
-  attr_accessor :speed, :number, :carriages
-
+  attr_accessor :speed, :number, :carriages, :current_station
 
   @trains = []
-
 
   def initialize(number)
     @number = number
@@ -48,6 +46,11 @@ class Train
     @speed += amount
   end
 
+  def speed_down(amount)
+    @speed -= amount
+    brake if @speed.negative?
+  end
+
   def brake
     @speed = 0
   end
@@ -55,14 +58,15 @@ class Train
   def take_route(route)
     @route = route
     @current_station = 0
-    @route.starting_station.accept_train(self)
+    @route.stations.first.accept_train(self)
   end
 
   def move_station
-    @current_station += 1
-    return last_station if @current_station > @route.in_between_stations.size
+    return 'End of the route' if @current_station.next_station.nil?
 
-    in_between_station
+    puts "12333333333333333333333333333333333333333333333333333333"
+
+    @current_station = @current_station.next_station
   end
 
   def print_stations
@@ -73,33 +77,7 @@ class Train
     @carriages.map(&block)
   end
 
-  private
-
-  def transfer(start, finish)
-    start.send_train(self)
-    finish.accept_train(self)
-  end
-
-  def last_station
-    'Train is in the end' unless @current_station == 1
-    transfer(@route.starting_station, @route.ending_station)
-    'Train reached the destination'
-  end
-
-  def in_between_station
-    stations = @route.in_between_stations
-    case @current_station
-    when 1
-      transfer(@route.starting_station, stations[@current_station - 1])
-    when @route.in_between_stations.size
-      transfer(stations.last, @route.ending_station)
-      puts 'Train reached the destination'
-    else
-      transfer(stations[@current_station - 1], stations[@current_station])
-    end
-  end
-
   def to_s
-    "Number: #{@number}, Type: #{@type}, Carriages: #{@carriages.count}"
+    "Number: #{@number}, Type: #{type}, Carriages: #{@carriages.count}, Speed: #{@speed}, Station: #{@current_station}"
   end
 end

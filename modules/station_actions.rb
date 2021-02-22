@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Actions regarding stations
 module StationActions
   def station_info(station)
     station.iterate_trains do |train|
@@ -11,20 +14,22 @@ module StationActions
   end
 
   def add_train_to_station
-    station = choose_station
-    return puts 'Нет такой станции' unless station
-
     train = choose_train
-    return puts 'Нет такого поезда' unless train
+    return puts 'There is no such train' unless train
 
-    station.accept_train(train)
-    puts "Поезд #{train.number} успешно добавлен на станцию #{station.name}!"
+    if !@route.nil?
+      train.take_route(@route)
+      puts "Train #{train.number} was successfully put on #{@route.stations.first.name}!"
+    else
+      puts 'Route is too short'
+    end
   end
 
   def create_station
-    puts 'Введите имя станции!'
+    puts 'Enter the name of the station!'
     station_name = gets.chomp
     stations << Station.new(station_name)
-    puts "Станция #{station_name} успешно создана!"
+    self.route = Route.new(*stations) if stations.size > 1
+    puts "Station #{station_name} was successfully created!"
   end
 end

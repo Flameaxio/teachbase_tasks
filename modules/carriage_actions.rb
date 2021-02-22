@@ -1,9 +1,16 @@
+# frozen_string_literal: true
+
+# Actions regarding carriages
 module CarriageActions
   include(TrainActions)
 
   def choose_carriage
     train = choose_train
     puts train
+    list_carriages(train)
+  end
+
+  def list_carriages(train)
     i = 0
     train.iterate_carriages do |carriage|
       puts "#{i += 1}: #{carriage}"
@@ -27,26 +34,30 @@ module CarriageActions
 
   def take_place(carriage)
     carriage.occupy_seat
-    puts 'Вы заняли 1 место'
+    puts 'You\'ve took one place'
   end
 
   def take_volume(carriage)
-    puts "Введите обьем который хотите занять! Свободно: #{carriage.free_space}"
+    puts "Enter the amount of volume you want to take! Free: #{carriage.free_space}"
     volume = gets.chomp.to_i
     if carriage.free_space > volume
       carriage.load_cargo(volume)
-      puts "Вы заняли обьем #{volume}"
+      puts "You've taken #{volume}"
     else
-      puts 'Вы не можете занять столько обьема'
+      puts 'You cannot take this much space'
     end
   end
 
   def remove_carriage
     train = choose_train
+    remove(train)
+  end
+
+  def remove(train)
     if train.remove_carriage
-      puts 'Вагон успешно отцеплен'
+      puts 'Carriage was successfully removed'
     else
-      puts 'В поезде нет вагонов'
+      puts 'There are no carriages in this train'
     end
   end
 
@@ -65,13 +76,13 @@ module CarriageActions
   end
 
   def add_passenger_carriage(train)
-    puts 'Введите количество мест'
+    puts 'Enter the amount of places'
     seats = gets.chomp.to_i
     train.add_carriage(PassengerCarriage.new(:PassengerCarriage, seats))
   end
 
   def add_cargo_carriage(train)
-    puts 'Введите обьем'
+    puts 'Enter the volume'
     volume = gets.chomp.to_i
     train.add_carriage(CargoCarriage.new(:PassengerCarriage, volume))
   end
