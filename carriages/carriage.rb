@@ -9,7 +9,6 @@ class Carriage
   attr_reader :type
   attr_accessor :parent_train
 
-
   def initialize(type, brand)
     self.brand = brand
     @type = type

@@ -2,7 +2,6 @@
 
 # Route class
 class Route
-
   def stations
     @stations ||= []
   end

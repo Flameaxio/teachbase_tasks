@@ -7,7 +7,6 @@ class CargoCarriage < Carriage
   attr_reader :capacity
   attr_accessor :load
 
-
   def initialize(type, capacity, brand)
     raise ArgumentError if capacity.negative?
 

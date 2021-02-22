@@ -4,7 +4,6 @@ require_relative 'carriage'
 
 # Passenger carriage class
 class PassengerCarriage < Carriage
-
   attr_reader :number_of_seats, :occupied_seats
 
   def initialize(type, number_of_seats, brand)
