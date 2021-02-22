@@ -21,11 +21,20 @@ class Train
     end
   end
 
-  attr_accessor :speed, :number, :carriages, :current_station
+  attr_accessor :number, :current_station
+  attr_writer :speed, :carriages
 
   @trains = []
-  @carriages = []
   @speed = 0
+
+  def carriages
+    @carriages ||= []
+  end
+
+  def speed
+    @speed ||= 0
+  end
+
 
   def initialize(number, brand)
     @number = number
