@@ -35,6 +35,7 @@ module CarriageActions
   def take_place(carriage)
     carriage.occupy_seat
     puts 'You\'ve took one place'
+    puts "History of changes: #{carriage.occupied_seats_history}"
   end
 
   def take_volume(carriage)
