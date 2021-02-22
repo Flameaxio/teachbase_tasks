@@ -1,38 +1,78 @@
 # frozen_string_literal: true
 
-# Importing classes
-require_relative 'station'
+require_relative 'trains/train'
 require_relative 'route'
-require_relative 'passenger_train'
-require_relative 'passenger_carriage'
-require_relative 'cargo_train'
-require_relative 'cargo_carriage'
-require_relative 'train_factory'
+require_relative 'station'
+require_relative 'carriages/carriage'
+require_relative 'carriages/cargo_carriage'
+require_relative 'trains/cargo_train'
+require_relative 'carriages/passenger_carriage'
+require_relative 'trains/passenger_train'
+require_relative 'modules/train_actions'
+require_relative 'modules/carriage_actions'
+require_relative 'modules/station_actions'
 
-route = Route.new(Station.new('Перемога'), Station.new('Метробудівників'))
-route.add_station(Station.new('Олексіївська'))
-route.add_station(Station.new('23-го серпня'))
-route.add_station(Station.new('Ботанічний сад'))
-route.add_station(Station.new('Наукова'))
-route.add_station(Station.new('Держпром'))
-route.add_station(Station.new('Архітектора Бекетова'))
-route.add_station(Station.new('Захисників України'))
-loop do
-  begin
-    puts 'Enter the number of the train (or stop): '
-    number = gets.chomp
-    break if number == 'stop'
+# Text UI
+class Main
+  include(TrainActions)
+  include(CarriageActions)
+  include(StationActions)
 
-    puts 'Enter the type of the train (passenger or cargo): '
-    type = gets.chomp
-    train = TrainFactory.get_train(number, type)
-    puts "Created train: #{train}"
-    route.starting_station.accept_train(train)
-  rescue ArgumentError => e
-    puts e.message
+  ACTIONS = {
+    1 => :create_station,
+    2 => :choose_train_type,
+    3 => :add_carriage,
+    4 => :remove_carriage,
+    5 => :add_train_to_station,
+    6 => :trains_on_station
+  }.freeze
+  attr_reader :stations, :trains
+
+  def initialize
+    @stations = []
+    @trains = []
+  end
+
+  def text_ui
+    loop do
+      action = choose_action
+      break if action.zero?
+
+      send(ACTIONS[action])
+    end
+  rescue StandardError
+    puts 'Wrong input'
     retry
   end
+
+  private
+
+  attr_writer :stations, :trains, :route
+
+  def choose_train_type
+    puts 'Select the type of the train!
+      1 - Passenger
+      2 - Cargo'
+    train_type = gets.chomp.to_i
+    create_train(train_type)
+  end
+
+  def trains_list(type = nil)
+    if type
+      trains.map { |t| t.number if t.type == type }.compact.join(' ')
+    else
+      trains.map(&:number).join(' ')
+    end
+  end
+
+  def choose_action
+    puts "List of actions\n0 - Exit\n1 - Create stations\n2 - Create trains\n3 - Add carriages to the train
+4 - Remove carriages from the train
+5 - Put trains on the station
+6 - List all the stations and trains on them
+Enter number:"
+    gets.chomp.to_i
+  end
 end
-station_block = proc { |x| printf "%15sTrain #{x.number} #{x.iterate_carriages(&:to_s)}\n", '' }
-route_block = proc { |x| x.iterate_trains(&station_block) }
-route.iterate_route(&route_block)
+
+Main.new.text_ui

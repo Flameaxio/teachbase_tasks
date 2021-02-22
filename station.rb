@@ -2,7 +2,15 @@
 
 # Station class
 class Station
+  include(Validation)
+
   attr_reader :name
+
+  attr_accessor :trains, :previous_station, :next_station
+
+  validate(:name, :presence)
+  validate(:previous_station, :type, option: Station)
+  validate(:next_station, :type, option: Station)
 
   @all_stations = []
 
@@ -14,17 +22,14 @@ class Station
     end
   end
 
-  def initialize(name)
+  def initialize(name, previous_station = nil, next_station = nil)
     @name = name
     @trains = []
+    previous_station.next_station = self unless previous_station.nil?
+    @previous_station = previous_station
+    @next_station = next_station
     self.class.all_stations.push(self)
     valid?
-  end
-
-  def valid?
-    raise ArgumentError, "Name can't be nil" if @name.nil?
-
-    true
   end
 
   def accept_train(train)
@@ -32,6 +37,7 @@ class Station
       puts 'Wrong input'
       return false
     end
+    train.current_station = self
     @trains.push(train)
   end
 
@@ -53,5 +59,9 @@ class Station
   def iterate_trains(&block)
     puts "Station: #{@name}"
     @trains.map(&block)
+  end
+
+  def to_s
+    @name
   end
 end
