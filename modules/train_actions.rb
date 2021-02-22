@@ -26,7 +26,8 @@ module TrainActions
   end
 
   def choose_train
-    puts "List of the trains: #{trains_list}"
+    puts "List of the trains(total passenger: #{PassengerTrain.instances}, total cargo: #{CargoTrain.instances}):" \
+    " #{trains_list}"
     puts 'Enter the number of the train'
     train_number = gets.chomp
     train = train_by_number(train_number)
@@ -53,12 +54,16 @@ module TrainActions
   end
 
   def create_passenger_train(train_number)
-    trains << PassengerTrain.new(train_number)
+    puts 'Enter the name of the brand'
+    brand = gets.chomp
+    trains << PassengerTrain.new(train_number, brand)
     puts "Passenger train was created with number #{train_number}!"
   end
 
   def create_cargo_train(train_number)
-    trains << CargoTrain.new(train_number)
+    puts 'Enter the name of the brand'
+    brand = gets.chomp
+    trains << CargoTrain.new(train_number, brand)
     puts "Cargo train was created with number #{train_number}!"
   end
 

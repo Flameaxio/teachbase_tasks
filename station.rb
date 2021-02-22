@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'modules/validation'
-
 # Station class
 class Station
   include(Validation)

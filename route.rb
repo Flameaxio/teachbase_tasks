@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'modules/validation'
-
 # Route class
 class Route
   include(Validation)
@@ -39,7 +37,7 @@ class Route
   end
 
   def to_s
-    @stations
+    stations.to_s
   end
 
   def get_stations(index)

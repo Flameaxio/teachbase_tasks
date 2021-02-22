@@ -7,7 +7,7 @@ module StationActions
       puts "Number: #{train.number}, Type: #{train.type}, Carriages: #{train.carriages.count}"
       i = 1
       train.iterate_carriages do |carriage|
-        puts "#{i}: #{carriage.info}"
+        puts "#{i}: #{carriage}"
         i += 1
       end
     end

@@ -21,20 +21,30 @@ class Train
     end
   end
 
-  attr_accessor :speed, :number, :carriages, :current_station
+  attr_accessor :number, :current_station
+  attr_writer :speed, :carriages
 
   @trains = []
+  @speed = 0
 
-  def initialize(number)
+  def carriages
+    @carriages ||= []
+  end
+
+  def speed
+    @speed ||= 0
+  end
+
+
+  def initialize(number, brand)
     @number = number
-    @speed = 0
-    @carriages = []
+    self.brand = brand
     if self.class.trains.nil?
       Train.trains.push(self)
     else
       self.class.trains.push(self)
     end
-    self.class.validate(:number, :format, option: /^[A-Z1-9]{3}-?[A-Z1-9]{2}$/)
+    register_instance
     valid?
   end
 
@@ -64,8 +74,6 @@ class Train
   def move_station
     return 'End of the route' if @current_station.next_station.nil?
 
-    puts "12333333333333333333333333333333333333333333333333333333"
-
     @current_station = @current_station.next_station
   end
 
@@ -78,6 +86,7 @@ class Train
   end
 
   def to_s
-    "Number: #{@number}, Type: #{type}, Carriages: #{@carriages.count}, Speed: #{@speed}, Station: #{@current_station}"
+    "Number: #{@number}, Type: #{type}, Carriages: #{@carriages.count}," \
+ "Speed: #{@speed}, Station: #{@current_station}, Brand #{brand}"
   end
 end

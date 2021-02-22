@@ -7,7 +7,7 @@ module CarriageActions
   def choose_carriage
     train = choose_train
     puts train
-    list_carriages(train)
+    take_place_or_volume(list_carriages(train))
   end
 
   def list_carriages(train)
@@ -16,8 +16,8 @@ module CarriageActions
       puts "#{i += 1}: #{carriage}"
       puts 'Choose carriage by number'
       carriage_index = gets.chomp.to_i
-      carriage = train.carriages[carriage_index - 1]
-      take_place_or_volume(carriage)
+
+      return train.carriages[carriage_index - 1]
     end
   end
 
@@ -54,7 +54,8 @@ module CarriageActions
   end
 
   def remove(train)
-    if train.remove_carriage
+    carriage = list_carriages(train)
+    if train.remove_carriage(carriage)
       puts 'Carriage was successfully removed'
     else
       puts 'There are no carriages in this train'
@@ -78,12 +79,18 @@ module CarriageActions
   def add_passenger_carriage(train)
     puts 'Enter the amount of places'
     seats = gets.chomp.to_i
-    train.add_carriage(PassengerCarriage.new(:PassengerCarriage, seats))
+    puts 'Enter the name of the brand'
+    brand = gets.chomp
+    train.add_carriage(PassengerCarriage.new(:PassengerCarriage, seats, brand))
+    puts 'Success!'
   end
 
   def add_cargo_carriage(train)
     puts 'Enter the volume'
     volume = gets.chomp.to_i
-    train.add_carriage(CargoCarriage.new(:PassengerCarriage, volume))
+    puts 'Enter the name of the brand'
+    brand = gets.chomp
+    train.add_carriage(CargoCarriage.new(:CargoCarriage, volume, brand))
+    puts 'Success!'
   end
 end

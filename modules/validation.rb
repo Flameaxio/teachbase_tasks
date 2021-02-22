@@ -83,9 +83,8 @@ module Validation
     end
 
     def type_validation(error_message, attribute_name, option: true)
-      unless public_send(attribute_name).is_a?(option) || public_send(attribute_name).nil?
-        raise ArgumentError, error_message
-      end
+      raise ArgumentError, error_message if !public_send(attribute_name).is_a?(option) || \
+                                            !public_send(attribute_name).nil?
     end
   end
 end

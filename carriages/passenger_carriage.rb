@@ -5,19 +5,21 @@ require_relative '../modules/accessors'
 
 # Passenger carriage class
 class PassengerCarriage < Carriage
-  include(Accessors)
   include(Validation)
+  include(Accessors)
 
-  attr_reader :number_of_seats
+  attr_reader :number_of_seats, :occupied_seats
 
   attr_accessor_with_history :occupied_seats
 
   validate(:number_of_seats, :format, option: /[1-9]+/)
 
-  def initialize(type, number_of_seats)
+  def initialize(type, number_of_seats, brand)
+    raise ArgumentError if number_of_seats.negative?
+
     @number_of_seats = number_of_seats
     @occupied_seats = 0
-    super type
+    super type, brand
     valid?
   end
 
@@ -33,6 +35,6 @@ class PassengerCarriage < Carriage
   end
 
   def to_s
-    "Total number of seats: #{@number_of_seats}, Occupied seats: #{@occupied_seats}"
+    "Total number of seats: #{@number_of_seats}, Occupied seats: #{@occupied_seats}, Brand #{brand}"
   end
 end

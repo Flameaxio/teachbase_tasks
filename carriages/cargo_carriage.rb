@@ -10,9 +10,11 @@ class CargoCarriage < Carriage
 
   validate(:capacity, :format, option: /[+]?\d+([.]\d+)?/)
 
-  def initialize(type, capacity)
+  def initialize(type, capacity, brand)
+    raise ArgumentError if capacity.negative?
+
     @capacity = capacity
-    super type
+    super type, brand
     valid?
   end
 
@@ -26,6 +28,6 @@ class CargoCarriage < Carriage
   end
 
   def to_s
-    "Total capacity: #{@capacity}, Load: #{@load}"
+    "Total capacity: #{@capacity}, Load: #{@load}, Brand #{super.brand}"
   end
 end

@@ -2,18 +2,22 @@
 
 require_relative '../modules/brand_module'
 require_relative '../modules/validation'
+require_relative '../modules/accessors'
 
 # Carriage class
 class Carriage
   include(BrandModule)
   include(Validation)
-
-  attr_reader :type
-  attr_accessor :parent_train
+  include(Accessors)
 
   validate(:type, :format, option: /(passenger) | (cargo)/)
 
-  def initialize(type)
+  attr_reader :type
+
+  strong_attr_accessor :parent_train, Train
+
+  def initialize(type, brand)
+    self.brand = brand
     @type = type
     valid?
   end
@@ -23,5 +27,4 @@ class Carriage
 
     self.parent_train = train
   end
-
 end

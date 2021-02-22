@@ -8,7 +8,6 @@ require_relative 'carriages/cargo_carriage'
 require_relative 'trains/cargo_train'
 require_relative 'carriages/passenger_carriage'
 require_relative 'trains/passenger_train'
-require_relative 'modules/validation'
 require_relative 'modules/train_actions'
 require_relative 'modules/carriage_actions'
 require_relative 'modules/station_actions'
@@ -23,11 +22,9 @@ class Main
     1 => :create_station,
     2 => :choose_train_type,
     3 => :add_carriage,
-    4 => :remove_station,
+    4 => :remove_carriage,
     5 => :add_train_to_station,
-    6 => :trains_on_station,
-    7 => :choose_carriage,
-    8 => :control_train
+    6 => :trains_on_station
   }.freeze
   attr_reader :stations, :trains
 
@@ -43,7 +40,9 @@ class Main
 
       send(ACTIONS[action])
     end
-    # Rescue
+  rescue StandardError
+    puts 'Wrong input'
+    retry
   end
 
   private
@@ -53,8 +52,7 @@ class Main
   def choose_train_type
     puts 'Select the type of the train!
       1 - Passenger
-      2 - Cargo
-    '
+      2 - Cargo'
     train_type = gets.chomp.to_i
     create_train(train_type)
   end
@@ -72,8 +70,6 @@ class Main
 4 - Remove carriages from the train
 5 - Put trains on the station
 6 - List all the stations and trains on them
-7 - Take place or volume in the carriage
-8 - Control the train
 Enter number:"
     gets.chomp.to_i
   end
