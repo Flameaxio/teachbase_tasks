@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Adds brand
 module BrandModule
-  attr_accessor :name
+  attr_accessor :brand
 end
